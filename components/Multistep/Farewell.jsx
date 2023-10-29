@@ -4,7 +4,7 @@ export const Farewell = () => {
 
     return (
       <div>
-        <label>That's it.</label>
+        <p>That's it.</p>
 
         <p>Good luck with whatever you decide to do next.</p>
         

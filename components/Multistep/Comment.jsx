@@ -6,7 +6,7 @@ export const Comment = ({ value, updateFormData }) => {
     return (
       <div>
         <p>We're sorry to hear you didn't really enjoy working here. Here's a chance to air your thoughts.</p>
-        <input type="text" value={value} onChange={userComment} />
+        <input className="commentSection" type="text" value={value} onChange={userComment} />
       </div>
     );
   };
