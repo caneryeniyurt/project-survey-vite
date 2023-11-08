@@ -1,5 +1,5 @@
 import "./App.scss";
-import { MultiStepForm } from "../components/Multistep/MultiStepForm";
+import { MultiStepForm } from "./components/MultiStepForm";
 // import { Data } from "./dataTypes/Data";
 
 function App() {

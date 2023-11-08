@@ -10,17 +10,19 @@ import { Greeting } from "./Greeting";
 import { Rate } from "./Rate";
 import { Comment } from "./Comment";
 import { Farewell } from "./Farewell";
+import { Summary } from "./Summary";
 
 // Define the MultiStepForm component
 export const MultiStepForm = () => {
+ 
   // State to store form data
   const [formData, setFormData] = useState({
     jobtitle: "",
     managerName: "",
-    date: new Date(),
+    date: "2023-11-08",
     department: "",
     reasonForLeave: "",
-    finalDate: "",
+    finalDate: "2023-11-08",
     rate:"",
     comment:"",
   });
@@ -33,7 +35,7 @@ export const MultiStepForm = () => {
   };
 
   const nextStep = () => {
-    if (currentStep < 10) setCurrentStep(currentStep + 1);
+    if (currentStep < 11) setCurrentStep(currentStep + 1);
   };
 
   // Function to move to the previous step in the form
@@ -41,22 +43,12 @@ export const MultiStepForm = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
-  const submitForm = () => {
-    console.log(formData);
-    const formattedData = ` Please confirm the following information;
-    Job Title: ${formData.jobtitle}
-    Manager: ${formData.managerName}
-    Start Date: ${formData.date}
-    Department: ${formData.department}
-    Reason for Leave: ${formData.reasonForLeave}
-    Final Date: ${formData.finalDate}
-    Overall Experience with the company :${formData.rate}
-    Final Date: ${formData.comment}
-    Thank you for attending this survey.
-  `;
+    // Function to move to the previous step in the form
+  const firstStep = () => {
+      if (currentStep == 11) setCurrentStep(1);
+    };
 
-    alert(formattedData);
-  };
+  
 
   // Render the component
   return (
@@ -101,18 +93,28 @@ export const MultiStepForm = () => {
       {currentStep === 10 && (
         <Farewell/>
       )}
-      {/* Render the Artist component if on step 9 */}
+      {/* Render the Artist component if on step 10 */}
+      {currentStep === 11 && (
+        <Summary value={formData}/>
+      )}
+      {/* Render the Artist component if on step 11 */}
 
       {/* Navigation buttons */}
       <div className="multi-step-form">
         {/* Show the "Back" button if not on the first step */}
-        {currentStep > 1 && <button className="NextBackButton" onClick={prevStep}>Back</button>}
+        {currentStep < 11 && currentStep > 1 && <button className="NextBackButton" onClick={prevStep}>Back</button>}
         {/* Show the "Next" button if not on the last step, otherwise show the "Submit" button */}
-        {currentStep < 10 ? (
+        {currentStep < 10 && <button className="NextBackButton" onClick={nextStep}>Next</button>}
+        {currentStep == 10 && <button className="NextBackButton" onClick={nextStep}>Submit</button>}
+        {currentStep == 11 && <button className="NextBackButton" onClick={firstStep}>Create a New Survey</button>}
+
+
+        {/* {currentStep < 10 ? (
           <button className="NextBackButton" onClick={nextStep}>Next</button>
         ) : (
-          <button className="NextBackButton" onClick={submitForm}>Show my answers</button>
-        )}
+          <button className="NextBackButton" onClick={nextStep}>Submit</button>
+        )} */}
+      
       </div>
     </div>
   );
